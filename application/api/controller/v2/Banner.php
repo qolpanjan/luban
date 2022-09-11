@@ -1,12 +1,15 @@
 <?php
 
-namespace app\api\controller\v1;
+namespace app\api\controller\v2;
 
 use app\api\validate\IdMustBePositiveInt;
 use app\api\model\Banner as BannerModel;
 use app\lib\exception\BannerMissException;
 use think\response\Json;
 
+/**
+ * v2 版本定义
+ */
 class Banner
 {
     /**
@@ -19,10 +22,6 @@ class Banner
      */
     function getBanner($id)
     {
-        (new IdMustBePositiveInt())->goCheck();
-
-        // $banner = BannerModel::find($id);
-        $banner =  BannerModel::getBannerById($id);       
-        return $banner;
+        return 'this is v2';
     }
 }
