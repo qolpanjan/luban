@@ -1,9 +1,17 @@
 <?php
+/*
+ * @Author: alimzhan 15365185687@qq.com
+ * @Date: 2022-08-28 17:11:25
+ * @LastEditors: alimzhan 15365185687@qq.com
+ * @LastEditTime: 2022-10-05 09:15:26
+ * @FilePath: \think-5.0.7\application\api\validate\BaseValidate.php
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 
 namespace app\api\validate;
 
 use app\lib\exception\ParameterException;
-use Couchbase\BaseException;
+use app\lib\exception\BaseException;
 use think\Exception;
 use think\Request;
 use think\Validate;
@@ -44,5 +52,30 @@ class BaseValidate extends Validate
         }else{
             return false;
         }
+    }
+
+    protected function isNotEmpty($value, $rule='', $data='', $field = '')
+    {
+        if (isEmpty($rule)) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public function getDataByRule($arrays)
+    {
+        // 不允许包含user_id或者uid，防止恶意请求
+        if (array_key_exists('user_id', $arrays) | array_key_exists('uid', $arrays)) {
+            throw new ParameterException([
+                'msg' => '不允许包含非法参数名user_id或者uid'
+            ]);
+        }
+        $newArray = [];
+
+        foreach($this->rule as $key => $value) {
+            $newArray[$key] = $arrays[$key];
+        }
+        return $newArray;
     }
 }

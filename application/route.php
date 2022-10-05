@@ -1,4 +1,12 @@
 <?php
+/*
+ * @Author: alimzhan 15365185687@qq.com
+ * @Date: 2022-08-22 23:33:01
+ * @LastEditors: alimzhan 15365185687@qq.com
+ * @LastEditTime: 2022-10-04 17:18:54
+ * @FilePath: \think-5.0.7\application\route.php
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
@@ -18,4 +26,13 @@ Route::get('api/:version/theme/:id', 'api/:version.Theme/getComplexOne');
 Route::get('api/:version/theme', 'api/:version.Theme/getSimpleList');
 
 Route::get('api/:version/product/recent', 'api/:version.Product/getRecent');
+Route::get('api/:version/product/:id', 'api/:version.Product/getOne', [], ['id' =>'\d+']);
+
+Route::get('api/:version/category/all', 'api/:version.Category/getAllCategory');
+
+Route::get('api/:version/category/:id', 'api/:version.Category/getOneCategory');
+
+Route::post('api/:version/token/user', 'api/:version.Token/getToken');
+
+Route::post('api/:version/address', 'api/:version.Address/createOrUpdateAddress');
 
