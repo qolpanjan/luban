@@ -10,7 +10,8 @@
 namespace app\api\service\UserToken;
 
 use app\api\model\User as UserModel;
-use app\lib\Exception\TokenException;
+use app\lib\exception\TokenException;
+use app\lib\enum\ScopeEnum;
 
 
 class UserToken extends Token
@@ -83,7 +84,7 @@ class UserToken extends Token
     private function prepareCacheValue($wxResult, $uid) {
         $cachedValue = $wxResult;
         $cachedValue['uid'] = $uid;
-        $cachedValue['scope'] = 16;
+        $cachedValue['scope'] = ScopeEnum::APP_USER;
         return $cachedValue;
     }
 

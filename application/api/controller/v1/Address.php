@@ -3,7 +3,7 @@
  * @Author: alimzhan 15365185687@qq.com
  * @Date: 2022-10-02 17:56:19
  * @LastEditors: alimzhan 15365185687@qq.com
- * @LastEditTime: 2022-10-05 09:18:33
+ * @LastEditTime: 2022-10-05 10:55:07
  * @FilePath: \think-5.0.7\application\api\controller\v1\Address.php
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,10 +13,17 @@ use app\api\validate\AddressValidate;
 use app\api\service\Token;
 use app\api\model\User as UserModel;
 use app\lib\exception\UserException;
-use app\lib\Exception\SuccessMessage;
+use app\lib\exception\SuccessMessage;
+use app\lib\enum\ScopeEnum;
+use app\lib\exception\UnAuthorizedException;
+use app\lib\exception\TokenException;
 
-class Address
+class Address extends BaseController
 {
+    protected $beforeActionList = [
+        'checkPrimaryScope' => ['only', 'createOrUpdateAddress']
+    ];
+
     public function createOrUpdateAddress() {
         $validate = new AddressValidate();
         $validate>goCheck();
