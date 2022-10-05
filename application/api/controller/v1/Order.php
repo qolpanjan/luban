@@ -3,7 +3,7 @@
  * @Author: alimzhan 15365185687@qq.com
  * @Date: 2022-10-05 10:15:26
  * @LastEditors: alimzhan 15365185687@qq.com
- * @LastEditTime: 2022-10-05 10:54:49
+ * @LastEditTime: 2022-10-05 11:16:59
  * @FilePath: \think-5.0.7\application\api\controller\v1\Order.php
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\service\Token;
 use app\lib\exception\UnAuthorizedException;
 use app\lib\exception\TokenException;
+use app\api\validate\OrderValidate;
 
 class Order extends BaseController
 {
@@ -29,6 +30,6 @@ class Order extends BaseController
      * 8、成功，检查库存量，进行库存量的扣除，以及支付失败后的结果反馈
      */
     public function placeOrder() {
-
+       (new OrderValidate())->goCheck();
     }
 }
